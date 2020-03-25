@@ -6,8 +6,6 @@ pipeline {
     }
 
     stages {
-        def image
-        
         stage('checkout') {
             agent any
             steps {
@@ -22,7 +20,7 @@ pipeline {
                 }
             }
             steps {
-                image = docker.build("myportail/authentication-init:1.0.${env.BUILD_ID}", "-f ./Docker/authInit/Dockerfile .")
+                def image = docker.build("myportail/authentication-init:1.0.${env.BUILD_ID}", "-f ./Docker/authInit/Dockerfile .")
             }
         }
         
