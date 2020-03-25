@@ -14,22 +14,14 @@ pipeline {
         }
         
         stage('build') {
-            agent {
-                docker {
-                    reuseNode: true
-                }
-            }
+            agent any
             steps {
                 def image = docker.build("myportail/authentication-init:1.0.${env.BUILD_ID}", "-f ./Docker/authInit/Dockerfile .")
             }
         }
         
         stage('push') {
-            agent {
-                docker {
-                    reuseNode: true
-                }
-            }
+            agent any
             steps: {
                 docker.withRegistry("", "dockerhub") {
                     image.push()
