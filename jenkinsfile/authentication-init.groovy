@@ -4,7 +4,7 @@ pipeline {
             label 'docker'
         }
     }
-    
+
     def image
     
     stage('checkout') {
@@ -20,5 +20,4 @@ pipeline {
             image.push()
         }
     }
-}
 }
