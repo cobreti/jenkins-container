@@ -10,7 +10,9 @@ pipeline {
         
         stage('build') {
             steps {
-                docker.build("myportail/authentication-init:1.0.${env.BUILD_ID}", "-f ./Docker/authInit/Dockerfile .")
+                script {
+                    docker.build("myportail/authentication-init:1.0.${env.BUILD_ID}", "-f ./Docker/authInit/Dockerfile .")
+                }
             }
         }
         
