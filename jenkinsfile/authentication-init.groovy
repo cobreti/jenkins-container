@@ -1,3 +1,5 @@
+def image
+
 pipeline {
     agent any
 
@@ -11,7 +13,7 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    def image = docker.build("myportail/authentication-init:1.0.${env.BUILD_ID}", "-f ./Docker/authInit/Dockerfile .")
+                    image = docker.build("myportail/authentication-init:1.0.${env.BUILD_ID}", "-f ./Docker/authInit/Dockerfile .")
                 }
             }
         }
