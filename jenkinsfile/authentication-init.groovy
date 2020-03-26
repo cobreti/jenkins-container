@@ -2,11 +2,9 @@ pipeline {
     agent any
 
     stages {
-        def image
-
         stage('checkout') {
             steps {
-                    git url: 'https://github.com/myportail/authentication'
+                git url: 'https://github.com/myportail/authentication'
             }
         }
         
@@ -16,12 +14,12 @@ pipeline {
             }
         }
         
-        stage('push') {
-            steps: {
-                docker.withRegistry("", "dockerhub") {
-                    image.push()
-                }
-            }
-        }
+        // stage('push') {
+        //     steps: {
+        //         docker.withRegistry("", "dockerhub") {
+        //             image.push()
+        //         }
+        //     }
+        // }
     }
 }
