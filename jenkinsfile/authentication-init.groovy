@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    def image
 
     stages {
+        def image
 
         stage('checkout') {
             steps {
