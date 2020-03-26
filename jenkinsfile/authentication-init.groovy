@@ -11,17 +11,19 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    docker.build("myportail/authentication-init:1.0.${env.BUILD_ID}", "-f ./Docker/authInit/Dockerfile .")
+                    def image = docker.build("myportail/authentication-init:1.0.${env.BUILD_ID}", "-f ./Docker/authInit/Dockerfile .")
                 }
             }
         }
         
-        // stage('push') {
-        //     steps: {
-        //         docker.withRegistry("", "dockerhub") {
-        //             image.push()
-        //         }
-        //     }
-        // }
+        stage('push') {
+            steps: {
+                script {
+                    docker.withRegistry("", "dockerhub") {
+                        image.push()
+                    }
+                }
+            }
+        }
     }
 }
