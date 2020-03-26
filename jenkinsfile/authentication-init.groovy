@@ -16,14 +16,14 @@ pipeline {
             }
         }
         
-        // stage('push') {
-        //     steps: {
-        //         script {
-        //             docker.withRegistry("", "dockerhub") {
-        //                 image.push()
-        //             }
-        //         }
-        //     }
-        // }
+        stage('push') {
+            steps {
+                script {
+                    docker.withRegistry("", "dockerhub") {
+                        image.push()
+                    }
+                }
+            }
+        }
     }
 }
