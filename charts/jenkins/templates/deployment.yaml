@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+        service: jenkins
+    spec:
+      volumes:
+        - name: jenkins-data
+          persistentVolumeClaim:
+            claimName: jenkins-data-claim
+        - name: dockersock
+          hostPath:
+            path: //var/run/docker.sock
+      containers:
+        - name: jenkins
+          image: cobreti/jenkins:latest
+          resources:
+            limits:
+              memory: "500M"
+              cpu: "0.5"
+          ports:
+            - containerPort: 8080
+              name: interface
+            - containerPort: 50000
+              name: data
+          volumeMounts:
+            - name: jenkins-data
+              mountPath: "/var/jenkins_home"
+            - name: dockersock
+              mountPath: /var/run/docker.sock
+          env:
+            - name: JENKINS_OPTS
+              value: "--prefix=/jenkins"
+      restartPolicy: Always
