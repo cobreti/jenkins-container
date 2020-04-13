@@ -27,3 +27,14 @@ spec:
             backend:
               serviceName: jenkins-service
               servicePort: 8080
+    - host: darksundesktop.danny-thibaudeau.ca
+      http:
+        paths:
+          - path: /jenkins/(.*)
+            backend:
+              serviceName: jenkins-service
+              servicePort: 8080
+          - path: /jenkins
+            backend:
+              serviceName: jenkins-service
+              servicePort: 8080
